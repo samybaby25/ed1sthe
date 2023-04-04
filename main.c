@@ -25,21 +25,23 @@ void imprime(int l, int c, int** mat)
    
 }
 
-
-/*
-int** transposta(int l, int c, int** mat)
+int** transposta(int m, int n, int** mat)
 {
     int i, j, transp[2][3];
-    
    
-   
-   for(i = 0; i < 3; i++)
+    int** t = (int**) malloc(n * sizeof(int*)); /*alocando a matriz transposta*/
+    for(i = 0; i < n; i++) 
     {
-        for(j = 0; j < 2; j++)
-            transp[i][j] = mat[j][i]; 
+        t[i] = malloc(m * sizeof(int));
+    }
+    
+   for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < m; j++)
+            t[i][j] = mat[j][i]; 
    }
-   return transp[i][j];
-} */
+   return t;
+} 
 
 int main(int argc, char** argv) {
     
@@ -65,6 +67,9 @@ int main(int argc, char** argv) {
     }
     imprime(m, n, mat);
     
+    int** transp = transposta(m, n, mat); 
+    
+    imprime(n, m, transp);
     
     /*
     printf("Preencha a matriz: \n");
