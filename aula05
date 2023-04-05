@@ -1,0 +1,51 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/main.c to edit this template
+ */
+
+/* 
+ * File:   main.c
+ * Author: sthefane.almeida
+ *
+ * Created on 5 de Abril de 2023, 19:25
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct student{
+    char nome[80];
+    int matricula;
+}Aluno;
+
+void inicializa(int n, Aluno** tab); 
+
+int main(int argc, char** argv) {
+    Aluno* tab[3];
+    
+    
+    inicializa(3, tab);
+    leAluno(N, tab); /*ta faltando algo*/
+    
+    return (EXIT_SUCCESS);
+}
+
+void inicializa(int n, Aluno** tab)
+{
+    for(int i = 0; i < n; i++)
+    {
+        tab[i] = NULL; /*endereço nulo*/
+    }
+}
+
+void leAluno(int n, Aluno** tab, int i)
+{
+    if(i >= 0 && i < n && tab[i] == NULL)
+    {
+        tab[i] = malloc(sizeof(Aluno)); /*aloquei espaço*/
+        printf("Digite o nome do aluno \n");
+        scanf("%80[^\n]", tab[i]->nome);
+        printf("Digite a matricula do aluno \n");
+        scanf("%d", &tab[i]->matricula); 
+    }
+}
