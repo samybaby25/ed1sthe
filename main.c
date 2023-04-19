@@ -1,95 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/main.c to edit this template
- */
-
-/* 
- * File:   main.c
- * Author: sthefane.almeida
- *
- * Created on 4 de Abril de 2023, 18:34
- */
-
+// arquivo main.c
 #include <stdio.h>
-#include <stdlib.h>
+#include "listaestatica.h"
 
-void imprime(int l, int c, int** mat)
-{
-    int i, j;
-    for(i = 0; i < l; i++)
-    {
-        printf("\n");
-        for(j = 0; j < c; j++)
-            printf("%d ", mat[i][j]);
+int main() {
+    ListaEstatica lista = cria_lista();
+
+    Aluno aluno;
+    printf("Informe o nome do aluno: ");
+    scanf("%s", aluno.nome);
+    printf("Informe a matricula do aluno: ");
+    scanf("%d", &aluno.matricula);
+    printf("Informe a nota do aluno: ");
+    scanf("%f", &aluno.nota);
+
+    // Inserir aluno na lista
+    if (insere_aluno(&lista, aluno) == -1) {
+        printf("Erro: lista cheia\n");
     }
-   
+
+    imprime_alunos(lista);
+
+    return 0;
 }
-
-int** transposta(int m, int n, int** mat)
-{
-    int i, j, transp[2][3];
-   
-    int** t = (int**) malloc(n * sizeof(int*)); /*alocando a matriz transposta*/
-    for(i = 0; i < n; i++) 
-    {
-        t[i] = malloc(m * sizeof(int));
-    }
-    
-   for(i = 0; i < n; i++)
-    {
-        for(j = 0; j < m; j++)
-            t[i][j] = mat[j][i]; 
-   }
-   return t;
-} 
-
-int main(int argc, char** argv) {
-    
-    int m, n;
-
-    int i, j;
-    
-    printf("digite o numero de linhas \n");
-    scanf("%d", &m);
-    printf("digite o numero de colunas\n");
-    scanf("%d", &n);
-    int** mat = (int**) malloc(m * sizeof(int*));/*quero alocar espaço para m ponteiros para inteiros*/
-    for(i = 0; i < m; i++) /*m são as linhas*/
-    {
-        mat[i] = malloc(n * sizeof(int));/*aqui eu quero alocar espaço para n vezes de inteiros*/
-    }/*alocando memória*/
-    
-    printf("Preencha a matriz: \n");
-    for(i = 0; i < m;  i++)
-    {
-        for(j = 0; j < n; j++)
-            scanf("%d", &mat[i][j]);
-    }
-    imprime(m, n, mat);
-    
-    int** transp = transposta(m, n, mat); 
-    
-    imprime(n, m, transp);
-    
-    /*
-    printf("Preencha a matriz: \n");
-    for(i = 0; i < 3; i++)
-    {
-        for(j = 0; j < 2; j++)
-            scanf("%d", &mat[i][j]);
-    }
-    
-    printf("\nMatriz: ");
-    for(i = 0; i < 3; i++)
-        
-    {
-        printf("\n");
-        for(j = 0; j < 2; j++)
-            printf("%d ", mat[i][j]);
-    }
-    */
-    
- 
-    return (EXIT_SUCCESS);
-}
-

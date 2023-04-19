@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "Aluno.h"
+
+void insere_inicio(No **lista, Aluno novo_aluno) {
+    No *novo_no = (No *) malloc(sizeof(No));
+    novo_no->aluno = novo_aluno;
+    novo_no->prox = *lista;
+    *lista = novo_no;
+}
+
+void insere_fim(No **lista, Aluno novo_aluno) {
+    No *novo_no = (No *) malloc(sizeof(No));
+    novo_no->aluno = novo_aluno;
+    novo_no->prox = NULL;
+
+    if (*lista == NULL) {
+        *lista = novo_no;
+        return;
+    }
+
+    No *aux = *lista;
+    while (aux->prox != NULL) {
+        aux = aux->prox;
+    }
+    aux->prox = novo_no;
+}
+
+void remove_inicio(No **lista) {
+    if (*lista == NULL) {
+        return;
+    }
+
+    No *aux = *lista;
+    *lista = aux->prox;
+    free(aux);
+}
+
+void remove_fim(No **lista) {
+    if (*lista == NULL) {
+        return;
+    }
+
+    if ((*lista)->prox == NULL) {
+        free(*lista);
+        *lista = NULL;
+        return;
+    }
+
+    No *aux = *lista;
+    while (aux->prox->prox != NULL) {
+        aux = aux->prox;
+    }
+    free(aux->prox);
+    aux->prox = NULL;
+}
+
+void imprime_lista(No *lista) {
+    printf("Alunos:\n");
+    while (lista != NULL) {
+        printf("Matricula: %d\n", lista->aluno.matricula);
+        printf("Nome: %s\n", lista->aluno.nome);
+        printf("Media: %.2f\n\n", lista->aluno.media);
+        lista = lista->prox;
+    }
+}
+
